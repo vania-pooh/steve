@@ -18,6 +18,7 @@
     <modules>
         <module>steve-core</module>
         <module>steve-annotations</module>
+        <module>steve-launcher</module>
     </modules>
 
     <dependencyManagement>
