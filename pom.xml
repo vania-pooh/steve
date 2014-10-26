@@ -19,6 +19,7 @@
         <module>steve-core</module>
         <module>steve-annotations</module>
         <module>steve-launcher</module>
+        <module>steve-cron</module>
     </modules>
 
     <dependencyManagement>
@@ -40,6 +41,16 @@
                 <artifactId>mockito-all</artifactId>
                 <version>1.9.5</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>ru.meridor.steve</groupId>
+                <artifactId>steve-launcher</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.inject</groupId>
+                <artifactId>guice</artifactId>
+                <version>3.0</version>
             </dependency>
             <dependency>
                 <groupId>org.quartz-scheduler</groupId>
