@@ -9,6 +9,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.TYPE})
 public @interface Job {
 
-    boolean async() default false;
+    String id() default "";
 
+    String schedule() default "";
 }

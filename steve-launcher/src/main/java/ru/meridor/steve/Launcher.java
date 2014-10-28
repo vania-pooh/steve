@@ -4,11 +4,9 @@ import ru.meridor.steve.processing.LaunchStrategy;
 
 import java.util.List;
 
-public interface Launcher {
+public interface Launcher<T, R> {
 
-    JobResult<?> launchSync(String jobId, Object data);
-
-    void launchAsync(String id, EventListener<?> eventListener);
+    void launch(String id, EventListener<T, R> eventListener);
 
     List<LaunchStrategy> getLaunchStrategies();
 
