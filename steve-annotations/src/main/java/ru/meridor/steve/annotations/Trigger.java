@@ -6,18 +6,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Some actions to do. Job is executed on the executor side (in some cases remotely).
+ * Something that triggers actions.
  */
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
-public @interface Job {
-
-    String id() default "";
+public @interface Trigger {
 
     /**
-     * Execute job using the schedule automatically
+     * Check trigger condition using the schedule
      * @return
      */
     String schedule() default "";
+
 }

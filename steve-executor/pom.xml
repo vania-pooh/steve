@@ -13,6 +13,10 @@
 
     <name>Steve Job Executor Core</name>
 
+    <properties>
+        <stecker.version>1.0.0-SNAPSHOT</stecker.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -34,6 +38,11 @@
             <groupId>ru.meridor.steve</groupId>
             <artifactId>steve-annotations</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.meridor.stecker</groupId>
+            <artifactId>stecker-plugin-loader</artifactId>
+            <version>${stecker.version}</version>
         </dependency>
     </dependencies>
 
