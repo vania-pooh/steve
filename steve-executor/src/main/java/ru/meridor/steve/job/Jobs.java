@@ -1,13 +1,21 @@
 package ru.meridor.steve.job;
 
 import ru.meridor.steve.Job;
+import ru.meridor.steve.SteveException;
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+//TODO: convert this to a set of MethodProcessors
+@Deprecated
 public class Jobs {
 
     public static <T, R> Job<T, R> fromFunction(final Function<T, R> function) {

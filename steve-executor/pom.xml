@@ -36,7 +36,12 @@
         </dependency>
         <dependency>
             <groupId>ru.meridor.steve</groupId>
-            <artifactId>steve-annotations</artifactId>
+            <artifactId>steve-framework</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.meridor.steve</groupId>
+            <artifactId>steve-provider</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

@@ -16,10 +16,11 @@
     </properties>
 
     <modules>
-        <module>steve-core</module>
-        <module>steve-annotations</module>
+        <module>steve-framework</module>
         <module>steve-launcher</module>
+        <module>steve-executor</module>
         <module>steve-cron</module>
+        <module>steve-provider</module>
     </modules>
 
     <dependencyManagement>

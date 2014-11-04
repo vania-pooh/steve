@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>steve-annotations</artifactId>
+    <artifactId>steve-framework</artifactId>
 
 
 </project>
