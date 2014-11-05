@@ -11,6 +11,6 @@ public interface LaunchStrategy {
 
     JobResult<?> processSync(String jobId, Object data);
 
-    void processAsync(String id, EventListener<?> eventListener);
+    void processAsync(String id, EventListener<?, ?> eventListener);
 
 }

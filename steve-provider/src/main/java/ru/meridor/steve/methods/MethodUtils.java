@@ -1,17 +1,23 @@
 package ru.meridor.steve.methods;
 
 import ru.meridor.steve.JobSignature;
+import ru.meridor.steve.annotations.Job;
+import ru.meridor.steve.annotations.JobCollection;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public final class MethodUtils {
 
+    public static final String METHOD_DELIMITER = "#";
+    
     public static Class getMethodGenericParameter(Method method, int parameterIndex) {
         Type returnType = method.getGenericReturnType();
 
@@ -24,12 +30,32 @@ public final class MethodUtils {
     }
 
     public static String[] methodToJobIds(Method method) {
+        List<String> jobIds = new ArrayList<>();
+        
         String className = method.getDeclaringClass().getCanonicalName();
         String methodName = method.getName();
-        //TODO: add more aliases support here
-        return new String[]{
-                className + "#" + methodName
-        };
+        String jobId = className + METHOD_DELIMITER + methodName;
+        jobIds.add(jobId);
+
+        Optional<String> jobAlias = (method.isAnnotationPresent(Job.class)) ?
+                Optional.ofNullable(method.getAnnotation(Job.class).id())
+                : Optional.empty();
+        if (jobAlias.isPresent()) {
+            jobIds.add(jobAlias.get());
+        }
+        
+        if (method.getDeclaringClass().isAnnotationPresent(JobCollection.class)) {
+            String collectionAlias = method.getAnnotation(JobCollection.class).id();
+            String jobAliasFromCollection = collectionAlias + METHOD_DELIMITER + methodName;
+            jobIds.add(jobAliasFromCollection);
+            
+            if (jobAlias.isPresent()) {
+                String collectionAndJobAliases = collectionAlias + METHOD_DELIMITER + jobAlias.get();
+                jobIds.add(collectionAndJobAliases);
+            }
+        }
+
+        return jobIds.toArray(new String[jobIds.size()]);
     }
 
     public static List<JobSignature> twoParameterGenericToJobSignatures(Method method) {

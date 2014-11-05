@@ -1,10 +1,12 @@
 package ru.meridor.steve.classes;
 
 import ru.meridor.steve.JobSignature;
+import ru.meridor.steve.annotations.Job;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +25,15 @@ public final class ClassUtils {
     }
 
     public static String[] classToJobIds(Class<?> someClass) {
-        return new String[]{someClass.getCanonicalName()}; //Add more ways to
+        List<String> jobIds = new ArrayList<>();
+        jobIds.add(someClass.getCanonicalName());
+        
+        if (someClass.isAnnotationPresent(Job.class)) {
+            String alias = someClass.getAnnotation(Job.class).id();
+            jobIds.add(alias);
+        }
+        
+        return jobIds.toArray(new String[jobIds.size()]);
     }
 
     public static List<JobSignature> twoParameterGenericClassToJobSignatures(Class<?> genericClass) {

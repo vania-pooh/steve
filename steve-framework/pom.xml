@@ -10,6 +10,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>steve-framework</artifactId>
+    
+    <name>Steve Framework</name>
+    <description>Steve annotations and core classes used to develop jobs.</description>
 
 
 </project>

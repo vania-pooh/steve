@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 @RunWith(Parameterized.class)
-public class TestJobExecutor {
+public class JobExecutorTest {
 
     private final Class testClass;
 
@@ -30,7 +30,7 @@ public class TestJobExecutor {
         });
     }
 
-    public TestJobExecutor(Class testClass, String jobId, String inputValue, Integer correctOutputValue) {
+    public JobExecutorTest(Class testClass, String jobId, String inputValue, Integer correctOutputValue) {
         this.testClass = testClass;
         this.jobId = jobId;
         this.inputValue = inputValue;
