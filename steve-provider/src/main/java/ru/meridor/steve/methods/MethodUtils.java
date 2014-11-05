@@ -40,17 +40,24 @@ public final class MethodUtils {
         Optional<String> jobAlias = (method.isAnnotationPresent(Job.class)) ?
                 Optional.ofNullable(method.getAnnotation(Job.class).id())
                 : Optional.empty();
-        if (jobAlias.isPresent()) {
+
+        boolean isJobAliasCorrect = jobAlias.isPresent() && !jobAlias.get().isEmpty();
+        if (isJobAliasCorrect) {
             jobIds.add(jobAlias.get());
         }
         
         if (method.getDeclaringClass().isAnnotationPresent(JobCollection.class)) {
-            String collectionAlias = method.getAnnotation(JobCollection.class).id();
-            String jobAliasFromCollection = collectionAlias + METHOD_DELIMITER + methodName;
-            jobIds.add(jobAliasFromCollection);
-            
-            if (jobAlias.isPresent()) {
-                String collectionAndJobAliases = collectionAlias + METHOD_DELIMITER + jobAlias.get();
+            Optional<String> collectionAlias = Optional.ofNullable(
+                    method.getDeclaringClass().getAnnotation(JobCollection.class).id()
+            );
+
+            if (collectionAlias.isPresent() && !collectionAlias.get().isEmpty()) {
+                String jobAliasFromCollection = collectionAlias.get() + METHOD_DELIMITER + methodName;
+                jobIds.add(jobAliasFromCollection);
+            }
+
+            if (isJobAliasCorrect) {
+                String collectionAndJobAliases = collectionAlias.get() + METHOD_DELIMITER + jobAlias.get();
                 jobIds.add(collectionAndJobAliases);
             }
         }

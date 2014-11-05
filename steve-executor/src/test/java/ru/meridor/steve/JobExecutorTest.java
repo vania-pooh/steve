@@ -26,7 +26,11 @@ public class JobExecutorTest {
     public static Iterable<Object[]> getParameters() {
         return Arrays.asList(new Object[][]{
                 {TestCollection.class, "ru.meridor.steve.TestCollection#testLength", "testString", 10},
-                {TestJobImplementation.class, "ru.meridor.steve.TestJobImplementation", "testMe", 6}
+                {TestCollection.class, "test-length", "42", 2},
+                {TestCollection.class, "test-collection#testLength", "test", 4},
+                {TestCollection.class, "test-collection#test-length", "str", 3},
+                {TestJobImplementation.class, "ru.meridor.steve.TestJobImplementation", "testMe", 6},
+                {TestJobImplementation.class, "test-job-implementation", "test-it", 7}
         });
     }
 

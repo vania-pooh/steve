@@ -6,10 +6,7 @@ import ru.meridor.steve.annotations.Job;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public final class ClassUtils {
@@ -29,8 +26,10 @@ public final class ClassUtils {
         jobIds.add(someClass.getCanonicalName());
         
         if (someClass.isAnnotationPresent(Job.class)) {
-            String alias = someClass.getAnnotation(Job.class).id();
-            jobIds.add(alias);
+            Optional<String> alias = Optional.ofNullable(someClass.getAnnotation(Job.class).id());
+            if (alias.isPresent() && !alias.get().isEmpty()) {
+                jobIds.add(alias.get());
+            }
         }
         
         return jobIds.toArray(new String[jobIds.size()]);
