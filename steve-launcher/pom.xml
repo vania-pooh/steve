@@ -11,5 +11,12 @@
 
     <artifactId>steve-launcher</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>ru.meridor.steve</groupId>
+            <artifactId>steve-provider</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>

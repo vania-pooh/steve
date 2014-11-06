@@ -4,10 +4,14 @@ import java.util.Optional;
 
 public interface EventListener<T, R> {
 
-    void jobStarted(String id, T data);
+    void beforeJobStarted(JobSignature jobSignature, T inputData) throws Exception;
 
-    void jobFinished(String id, JobResult<R> outputData);
+    void afterJobStarted(JobSignature jobSignature, T inputData) throws Exception;
 
-    void jobInterrupted(String id, Optional<Throwable> e);
+    void beforeJobFinished(JobSignature jobSignature, T inputData, R returnData) throws Exception;
+
+    void afterJobFinished(JobSignature jobSignature, T inputData, R returnData) throws Exception;
+
+    void jobInterrupted(JobSignature jobSignature, Optional<Throwable> e) throws Exception;
 
 }

@@ -1,13 +1,9 @@
 package ru.meridor.steve;
 
-import ru.meridor.steve.processing.LaunchStrategy;
-
-import java.util.List;
-
 public interface Launcher<T, R> {
 
-    void launch(String id, EventListener<T, R> eventListener);
+    boolean jobExists(JobSignature jobSignature);
 
-    List<LaunchStrategy> getLaunchStrategies();
+    void launch(JobSignature jobSignature, EventListener<T, R> eventListener) throws SteveException;
 
 }

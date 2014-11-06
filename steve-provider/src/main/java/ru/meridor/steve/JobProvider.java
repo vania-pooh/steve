@@ -9,6 +9,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
 
+//TODO: be able to create jobs from annotations
 public class JobProvider implements Provider {
 
     private final Map<JobSignature, Job<?, ?>> alreadyRequestedJobs = new HashMap<>();
