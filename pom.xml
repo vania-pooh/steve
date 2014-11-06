@@ -21,6 +21,7 @@
         <module>steve-executor</module>
         <module>steve-cron</module>
         <module>steve-provider</module>
+        <module>steve-model</module>
     </modules>
 
     <dependencyManagement>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:s="urn:model.steve.meridor.ru"
+           targetNamespace="urn:model.steve.meridor.ru">
+
+    <xs:element name="jobs" type="s:jobs-entry"/>
+
+    <xs:complexType name="jobs-entry">
+        <xs:all>
+            <xs:element name="job" type="s:job-entry" minOccurs="1"/>
+        </xs:all>
+        <xs:attribute name="start" type="xs:long" use="required"/>
+        <xs:attribute name="stop" type="xs:long" use="required"/>
+        <xs:attribute name="version" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="job-entry">
+        <xs:all>
+            <xs:element name="id" type="xs:string" />
+            <xs:element name="aliases" type="s:aliases-entry" />
+            <xs:element name="input-type" type="xs:string" />
+            <xs:element name="return-type" type="xs:string" />
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="aliases-entry">
+        <xs:sequence>
+            <xs:element name="alias" type="xs:string" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+</xs:schema>
