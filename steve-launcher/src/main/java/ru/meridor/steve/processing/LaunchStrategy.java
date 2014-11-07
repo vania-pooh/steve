@@ -1,13 +1,10 @@
 package ru.meridor.steve.processing;
 
 import ru.meridor.steve.EventListener;
+import ru.meridor.steve.JobSignature;
 
-public interface LaunchStrategy {
+public interface LaunchStrategy<T, R> {
 
-    String getId();
-
-    boolean asyncJobSupported();
-
-    void processAsync(String id, EventListener<?, ?> eventListener);
+    void launch(JobSignature jobSignature, EventListener<T, R> eventListener);
 
 }
