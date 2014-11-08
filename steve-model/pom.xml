@@ -11,11 +11,14 @@
 
     <artifactId>steve-model</artifactId>
 
+    <name>Steve XML Storage Model</name>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.jvnet.jaxb2.maven2</groupId>
                 <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.11.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -51,7 +54,7 @@
                         <plugin>
                             <groupId>org.jvnet.jaxb2_commons</groupId>
                             <artifactId>jaxb2-basics</artifactId>
-                            <version>0.6.5</version>
+                            <version>0.9.1</version>
                         </plugin>
                     </plugins>
                 </configuration>
@@ -63,7 +66,7 @@
         <dependency>
             <groupId>org.jvnet.jaxb2_commons</groupId>
             <artifactId>jaxb2-basics-runtime</artifactId>
-            <version>0.6.5</version>
+            <version>0.9.1</version>
         </dependency>
     </dependencies>
 

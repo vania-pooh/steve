@@ -4,30 +4,28 @@
            xmlns:s="urn:model.steve.meridor.ru"
            targetNamespace="urn:model.steve.meridor.ru">
 
-    <xs:element name="jobs" type="s:jobs-entry"/>
+    <xs:element name="jobs" type="s:jobs"/>
 
-    <xs:complexType name="jobs-entry">
-        <xs:all>
-            <xs:element name="job" type="s:job-entry" minOccurs="1"/>
-        </xs:all>
-        <xs:attribute name="start" type="xs:long" use="required"/>
-        <xs:attribute name="stop" type="xs:long" use="required"/>
-        <xs:attribute name="version" type="xs:string"/>
+    <xs:complexType name="jobs">
+        <xs:sequence>
+            <xs:element name="job-entries" type="s:job-entry" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="created" type="xs:long" use="required"/>
     </xs:complexType>
 
     <xs:complexType name="job-entry">
         <xs:all>
-            <xs:element name="id" type="xs:string" />
-            <xs:element name="aliases" type="s:aliases-entry" />
-            <xs:element name="input-type" type="xs:string" />
-            <xs:element name="return-type" type="xs:string" />
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="aliases" type="s:aliases"/>
+            <xs:element name="input-type" type="xs:string"/>
+            <xs:element name="return-type" type="xs:string"/>
         </xs:all>
     </xs:complexType>
 
-    <xs:complexType name="aliases-entry">
+    <xs:complexType name="aliases">
         <xs:sequence>
             <xs:element name="alias" type="xs:string" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
-    
+
 </xs:schema>

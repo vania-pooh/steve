@@ -58,7 +58,7 @@ public class JobProvider implements Provider {
             for (MethodProcessor processor : methodProcessors) {
                 if (processor.canProcess(classMethod)) {
                     List<JobSignature> jobSignatures = processor.store(classMethod);
-                    for (JobSignature jobSignature : jobSignatures) {
+                    for (JobSignature<?, ?> jobSignature : jobSignatures) {
                         jobProcessors.put(jobSignature, processor);
                     }
                     break;
@@ -81,7 +81,7 @@ public class JobProvider implements Provider {
         for (ClassProcessor classProcessor : classProcessors) {
             if (classProcessor.canProcess(jobClass)) {
                 List<JobSignature> jobSignatures = classProcessor.store(jobClass);
-                for (JobSignature jobSignature : jobSignatures) {
+                for (JobSignature<?, ?> jobSignature : jobSignatures) {
                     jobProcessors.put(jobSignature, classProcessor);
                 }
             }
@@ -89,7 +89,7 @@ public class JobProvider implements Provider {
     }
 
     public <T, R> Job<T, R> get(String jobId, Class<T> inputDataType, Class<R> returnDataType) throws SteveException {
-        JobSignature jobSignature = new JobSignature(jobId, inputDataType, returnDataType);
+        JobSignature<T, R> jobSignature = new JobSignature<>(jobId, inputDataType, returnDataType);
 
         if (!scanned){
             scan();

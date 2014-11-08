@@ -1,7 +1,9 @@
 package ru.meridor.steve.processing;
 
+import ru.meridor.steve.JobSignature;
+
 public interface Scheduler {
 
-    <I, O> void schedule(String id);
+    <T, R> void schedule(JobSignature<T, R> jobSignature);
 
 }
