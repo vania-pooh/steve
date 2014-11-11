@@ -9,5 +9,8 @@ public class MemoryRouteBuilder extends RouteBuilder {
         from("seda:jobs")
                 .bean(ExecutorBean.class)
                 .to("seda:results");
+
+        from("seda:results")
+                .bean(OutputBean.class);
     }
 }

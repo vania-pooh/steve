@@ -49,7 +49,7 @@ public class JobExecutorTest {
         );
         JobExecutor jobExecutor = new JobExecutor(jobProvider);
 
-        Integer outputValue = jobExecutor.execute(jobId, inputValue, String.class, Integer.class);
+        Object outputValue = jobExecutor.execute(jobId, inputValue, String.class, Integer.class);
         assertThat(outputValue, equalTo(correctOutputValue));
     }
 }

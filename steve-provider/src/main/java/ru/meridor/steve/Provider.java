@@ -1,7 +1,10 @@
 package ru.meridor.steve;
 
+import com.google.inject.ImplementedBy;
+
+@ImplementedBy(JobProvider.class)
 public interface Provider {
 
-    <T, R> Job<T, R> get(String jobId, Class<T> inputDataType, Class<R> returnDataType) throws SteveException;
+    Job<?, ?> get(String jobId, Class<?> inputDataType, Class<?> returnDataType) throws SteveException;
 
 }

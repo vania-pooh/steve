@@ -1,15 +1,19 @@
 package ru.meridor.steve;
 
-public class JobExecutor {
+import com.google.inject.Inject;
 
-    private final JobProvider jobProvider;
+public class JobExecutor implements Executor {
 
-    public JobExecutor(JobProvider jobProvider) {
+    private final Provider jobProvider;
+
+    @Inject
+    public JobExecutor(Provider jobProvider) {
         this.jobProvider = jobProvider;
     }
 
-    public <T, R> R execute(String jobId, T data, Class<T> inputDataType, Class<R> returnDataType) throws SteveException {
-        Job<T, R> job = jobProvider.get(jobId, inputDataType, returnDataType);
+    public Object execute(String jobId, Object data, Class<?> inputDataType, Class<?> returnDataType) throws SteveException {
+        @SuppressWarnings("unchecked")
+        Job<Object, Object> job = (Job<Object, Object>) jobProvider.get(jobId, inputDataType, returnDataType);
         try {
             return job.execute(data);
         } catch (Exception e) {

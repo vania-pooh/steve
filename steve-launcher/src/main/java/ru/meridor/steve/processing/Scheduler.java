@@ -4,6 +4,6 @@ import ru.meridor.steve.JobSignature;
 
 public interface Scheduler {
 
-    <T, R> void schedule(JobSignature<T, R> jobSignature);
+    <T, R> void schedule(JobSignature jobSignature);
 
 }

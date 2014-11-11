@@ -16,9 +16,7 @@ public class MemoryConfiguration implements LauncherConfiguration {
                         bind(LaunchStrategy.class).to(MemoryLaunchStrategy.class);
                     }
                 },
-                new CamelModuleWithRouteTypes(
-                        //TODO: insert route types here
-                )
+                new CamelModuleWithRouteTypes(MemoryRouteBuilder.class)
         };
     }
 

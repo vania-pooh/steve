@@ -14,7 +14,7 @@ public class MemoryLaunchStrategy implements LaunchStrategy {
 
     @Override
     public void launch(JobSignature jobSignature, Object data) {
-        camelContext.createProducerTemplate().sendBody("seda:jobs", data);
+        camelContext.createProducerTemplate().sendBodyAndHeader("seda:jobs", data, "JobSignature", jobSignature);
     }
 
 }

@@ -88,7 +88,7 @@ public class JobProvider implements Provider {
         }
     }
 
-    public <T, R> Job<T, R> get(String jobId, Class<T> inputDataType, Class<R> returnDataType) throws SteveException {
+    public Job<?, ?> get(String jobId, Class<?> inputDataType, Class<?> returnDataType) throws SteveException {
         JobSignature jobSignature = new JobSignature(jobId, inputDataType, returnDataType);
 
         if (!scanned){
@@ -97,14 +97,11 @@ public class JobProvider implements Provider {
         }
 
         if (alreadyRequestedJobs.containsKey(jobSignature)) {
-            @SuppressWarnings("unchecked")
-            Job<T, R> job = (Job<T, R>) alreadyRequestedJobs.get(jobSignature);
-            return job;
+            return alreadyRequestedJobs.get(jobSignature);
         }
         if (jobProcessors.containsKey(jobSignature)) {
             try {
-                @SuppressWarnings("unchecked")
-                Job<T, R> job = jobProcessors
+                Job<?, ?> job = jobProcessors
                         .get(jobSignature)
                         .createJob(jobSignature);
                 alreadyRequestedJobs.put(jobSignature, job);

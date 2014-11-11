@@ -1,7 +1,10 @@
 package ru.meridor.steve;
 
-public interface Executor<I, O> {
+import com.google.inject.ImplementedBy;
 
-    O execute(Job<I, O> job);
+@ImplementedBy(JobExecutor.class)
+public interface Executor {
+
+    Object execute(String jobId, Object data, Class<?> inputDataType, Class<?> returnDataType) throws SteveException;
 
 }
