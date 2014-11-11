@@ -17,7 +17,7 @@ public class FunctionMethodProcessor extends AbstractMethodProcessor {
     @Override
     public List<JobSignature> store(Method method) {
         List<JobSignature> jobSignatures = MethodUtils.twoParameterGenericToJobSignatures(method);
-        for (JobSignature<?, ?> jobSignature : jobSignatures) {
+        for (JobSignature jobSignature : jobSignatures) {
             put(jobSignature, method);
         }
         return jobSignatures;

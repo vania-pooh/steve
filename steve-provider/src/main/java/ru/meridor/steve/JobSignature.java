@@ -1,14 +1,14 @@
 package ru.meridor.steve;
 
-public class JobSignature<T, R> {
+public class JobSignature {
 
     private final String id;
 
-    private final Class<T> inputDataType;
+    private final Class<?> inputDataType;
 
-    private final Class<R> returnDataType;
+    private final Class<?> returnDataType;
 
-    public JobSignature(String id, Class<T> inputDataType, Class<R> returnDataType) {
+    public JobSignature(String id, Class<?> inputDataType, Class<?> returnDataType) {
         this.id = id;
         this.inputDataType = inputDataType;
         this.returnDataType = returnDataType;
@@ -41,11 +41,11 @@ public class JobSignature<T, R> {
         return id;
     }
 
-    public Class<T> getInputDataType() {
+    public Class<?> getInputDataType() {
         return inputDataType;
     }
 
-    public Class<R> getReturnDataType() {
+    public Class<?> getReturnDataType() {
         return returnDataType;
     }
 }

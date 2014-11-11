@@ -9,30 +9,32 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>steve-launcher</artifactId>
+    <artifactId>steve-memory-strategy</artifactId>
 
-    <name>Steve Job Launcher</name>
+    <name>Steve SEDA Launch Strategy</name>
+
+    <description>In-memory job launch strategy using SEDA queue</description>
 
     <dependencies>
         <dependency>
             <groupId>ru.meridor.steve</groupId>
-            <artifactId>steve-provider</artifactId>
+            <artifactId>steve-launcher</artifactId>
         </dependency>
         <dependency>
             <groupId>ru.meridor.steve</groupId>
-            <artifactId>steve-model</artifactId>
+            <artifactId>steve-executor</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-guice</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
         </dependency>
     </dependencies>
 

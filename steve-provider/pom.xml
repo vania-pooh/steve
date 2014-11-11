@@ -15,7 +15,6 @@
         <dependency>
             <groupId>ru.meridor.steve</groupId>
             <artifactId>steve-framework</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

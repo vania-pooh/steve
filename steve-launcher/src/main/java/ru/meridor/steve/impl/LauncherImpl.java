@@ -1,16 +1,21 @@
 package ru.meridor.steve.impl;
 
 import com.google.inject.Inject;
-import ru.meridor.steve.*;
-import ru.meridor.steve.EventListener;
+import ru.meridor.steve.JobSignature;
+import ru.meridor.steve.LaunchStrategy;
+import ru.meridor.steve.Launcher;
+import ru.meridor.steve.SteveException;
 import ru.meridor.steve.model.JobEntry;
 import ru.meridor.steve.model.Jobs;
 
 import javax.xml.bind.JAXB;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-public class LauncherImpl<T, R> implements Launcher<T, R> {
+public class LauncherImpl implements Launcher {
 
     private static final String JOBS_FILENAME = "jobs.xml";
 
@@ -18,22 +23,12 @@ public class LauncherImpl<T, R> implements Launcher<T, R> {
 
     private boolean loadedJobs = false;
 
-    private LaunchStrategy<?, ?> launchStrategy;
+    private LaunchStrategy launchStrategy;
 
     @Inject
     public LauncherImpl(LaunchStrategy launchStrategy) {
         this.launchStrategy = launchStrategy;
     }
-
-    @Override
-    public boolean jobExists(String jobId, Class<T> inputDataType, Class<R> returnDataType) throws SteveException {
-        if (!loadedJobs) {
-            availableJobs.addAll(getAvailableJobs());
-            loadedJobs = true;
-        }
-        return availableJobs.contains(new JobSignature<>(jobId, inputDataType, returnDataType));
-    }
-
 
     private List<JobSignature> getAvailableJobs() throws SteveException {
         List<JobSignature> availableJobs = new ArrayList<>();
@@ -50,7 +45,7 @@ public class LauncherImpl<T, R> implements Launcher<T, R> {
                     Class<?> inputClass = Class.forName(inputType);
                     String returnType = jobEntry.getReturnType();
                     Class<?> returnClass = Class.forName(returnType);
-                    availableJobs.add(new JobSignature<>(jobId, inputClass, returnClass));
+                    availableJobs.add(new JobSignature(jobId, inputClass, returnClass));
                 } catch (ClassNotFoundException e) {
                     break;
                 }
@@ -61,16 +56,24 @@ public class LauncherImpl<T, R> implements Launcher<T, R> {
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void launch(String jobId, T inputData, Class<R> returnDataType, EventListener<T, R> eventListener) throws SteveException {
-        JobSignature<T, R> jobSignature = new JobSignature<>(jobId, (Class<T>) inputData.getClass(), returnDataType);
+    public <T, R> void launch(String jobId, T inputData, Class<R> returnDataType) throws SteveException {
+        if (!loadedJobs) {
+            availableJobs.addAll(getAvailableJobs());
+            loadedJobs = true;
+        }
+        JobSignature jobSignature = new JobSignature(jobId, inputData.getClass(), returnDataType);
         if (availableJobs.contains(jobSignature)){
             launchStrategy.launch(
-                    (JobSignature) jobSignature,
-                    (EventListener) eventListener
+                    jobSignature,
+                    inputData
             );
         }
         throw new SteveException(String.format("Job not found: %s - %s - %s", jobId, inputData.toString(), returnDataType));
+    }
+
+    @Override
+    public void subscribe(Object handler) {
+
     }
 }
