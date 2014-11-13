@@ -1,6 +1,5 @@
 package ru.meridor.steve.impl;
 
-import com.google.inject.Inject;
 import ru.meridor.steve.Executor;
 import ru.meridor.steve.Job;
 import ru.meridor.steve.Provider;
@@ -10,7 +9,6 @@ public class ExecutorImpl implements Executor {
 
     private final Provider jobProvider;
 
-    @Inject
     public ExecutorImpl(Provider jobProvider) {
         this.jobProvider = jobProvider;
     }

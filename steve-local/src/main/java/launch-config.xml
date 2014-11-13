@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <bean id="provider" class="ru.meridor.steve.JobProvider" />
+
+    <bean id="executor" class="ru.meridor.steve.impl.ExecutorImpl" >
+        <constructor-arg ref="provider"/>
+    </bean>
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+        <proxy id="launcher"
+               serviceInterface="ru.meridor.steve.Launcher"
+               serviceUrl="seda:jobs"/>
+
+        <route>
+            <from uri="seda:jobs"/>
+            <to uri="bean:executor"/>
+        </route>
+    </camelContext>
+
+</beans>

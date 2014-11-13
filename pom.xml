@@ -15,6 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <camel.version>2.14.0</camel.version>
         <stecker.version>1.0.0-SNAPSHOT</stecker.version>
+        <spring.version>4.1.2.RELEASE</spring.version>
         <guice.version>3.0</guice.version>
     </properties>
 
@@ -25,11 +26,19 @@
         <module>steve-cron</module>
         <module>steve-provider</module>
         <module>steve-model</module>
-        <module>steve-memory-strategy</module>
+        <module>steve-local</module>
+        <module>steve-local</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- Spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
 
             <!-- Testing -->
             <dependency>

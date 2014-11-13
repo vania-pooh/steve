@@ -38,10 +38,6 @@
             <groupId>ru.meridor.stecker</groupId>
             <artifactId>stecker-plugin-loader</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-        </dependency>
     </dependencies>
 
 </project>
