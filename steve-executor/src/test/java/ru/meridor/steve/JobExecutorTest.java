@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import ru.meridor.steve.classes.JobClassProcessor;
+import ru.meridor.steve.impl.ExecutorImpl;
 import ru.meridor.steve.methods.FunctionMethodProcessor;
 
 import java.util.Arrays;
@@ -47,7 +48,7 @@ public class JobExecutorTest {
                 Arrays.asList(testClass),
                 Arrays.asList(new FunctionMethodProcessor(), new JobClassProcessor())
         );
-        JobExecutor jobExecutor = new JobExecutor(jobProvider);
+        ExecutorImpl jobExecutor = new ExecutorImpl(jobProvider);
 
         Object outputValue = jobExecutor.execute(jobId, inputValue, String.class, Integer.class);
         assertThat(outputValue, equalTo(correctOutputValue));

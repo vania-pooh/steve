@@ -1,13 +1,17 @@
-package ru.meridor.steve;
+package ru.meridor.steve.impl;
 
 import com.google.inject.Inject;
+import ru.meridor.steve.Executor;
+import ru.meridor.steve.Job;
+import ru.meridor.steve.Provider;
+import ru.meridor.steve.SteveException;
 
-public class JobExecutor implements Executor {
+public class ExecutorImpl implements Executor {
 
     private final Provider jobProvider;
 
     @Inject
-    public JobExecutor(Provider jobProvider) {
+    public ExecutorImpl(Provider jobProvider) {
         this.jobProvider = jobProvider;
     }
 

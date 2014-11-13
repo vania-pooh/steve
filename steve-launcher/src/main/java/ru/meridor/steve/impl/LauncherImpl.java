@@ -1,12 +1,10 @@
 package ru.meridor.steve.impl;
 
-import com.google.inject.Inject;
 import ru.meridor.steve.JobSignature;
 import ru.meridor.steve.LaunchStrategy;
 import ru.meridor.steve.Launcher;
 import ru.meridor.steve.SteveException;
 import ru.meridor.steve.model.JobEntry;
-import ru.meridor.steve.model.Jobs;
 
 import javax.xml.bind.JAXB;
 import java.net.URL;
@@ -25,7 +23,6 @@ public class LauncherImpl implements Launcher {
 
     private LaunchStrategy launchStrategy;
 
-    @Inject
     public LauncherImpl(LaunchStrategy launchStrategy) {
         this.launchStrategy = launchStrategy;
     }

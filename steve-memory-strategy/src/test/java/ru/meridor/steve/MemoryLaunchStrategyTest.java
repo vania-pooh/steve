@@ -10,12 +10,7 @@ public class MemoryLaunchStrategyTest {
 
     @Test
     public void testLaunch() throws InterruptedException {
-        LaunchStrategy launchStrategy = Guice
-                .createInjector(new MemoryConfiguration().getConfiguration())
-                .getInstance(LaunchStrategy.class);
-        launchStrategy.launch(new JobSignature("test-job", String.class, Integer.class), "test");
-        Thread.sleep(5000);
-        assertThat(true, equalTo(true));
+        throw new UnsupportedOperationException();
     }
 
 }
