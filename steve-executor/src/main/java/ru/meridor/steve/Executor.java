@@ -1,7 +1,9 @@
 package ru.meridor.steve;
 
+import java.io.Serializable;
+
 public interface Executor {
 
-    Object execute(String jobId, Object data, Class<?> inputDataType, Class<?> returnDataType) throws SteveException;
+    Serializable execute(JobRun jobRun) throws SteveException;
 
 }

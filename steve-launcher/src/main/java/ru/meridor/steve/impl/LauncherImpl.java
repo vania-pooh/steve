@@ -1,76 +1,34 @@
 package ru.meridor.steve.impl;
 
-import ru.meridor.steve.JobSignature;
-import ru.meridor.steve.LaunchStrategy;
-import ru.meridor.steve.Launcher;
-import ru.meridor.steve.SteveException;
-import ru.meridor.steve.model.JobEntry;
+import ru.meridor.steve.*;
 
-import javax.xml.bind.JAXB;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.Collections;
 
 public class LauncherImpl implements Launcher {
 
-    private static final String JOBS_FILENAME = "jobs.xml";
 
-    private final Set<JobSignature> availableJobs = new HashSet<>();
+    private final JobAware jobAware;
 
-    private boolean loadedJobs = false;
+    private final LaunchStrategy launchStrategy;
 
-    private LaunchStrategy launchStrategy;
-
-    public LauncherImpl(LaunchStrategy launchStrategy) {
+    public LauncherImpl(LaunchStrategy launchStrategy, JobAware jobAware) {
         this.launchStrategy = launchStrategy;
-    }
-
-    private List<JobSignature> getAvailableJobs() throws SteveException {
-        List<JobSignature> availableJobs = new ArrayList<>();
-        URL jobsXmlURL = getClass().getClassLoader().getResource(JOBS_FILENAME);
-        if (jobsXmlURL == null) {
-            throw new SteveException(JOBS_FILENAME + " file does not exist");
-        }
-        try {
-            Jobs jobs = JAXB.unmarshal(jobsXmlURL, Jobs.class);
-            for (JobEntry jobEntry : jobs.getJobEntries()) {
-                try {
-                    String jobId = jobEntry.getId();
-                    String inputType = jobEntry.getInputType();
-                    Class<?> inputClass = Class.forName(inputType);
-                    String returnType = jobEntry.getReturnType();
-                    Class<?> returnClass = Class.forName(returnType);
-                    availableJobs.add(new JobSignature(jobId, inputClass, returnClass));
-                } catch (ClassNotFoundException e) {
-                    break;
-                }
-            }
-            return availableJobs;
-        } catch (Exception e) {
-            throw new SteveException(e);
-        }
+        this.jobAware = jobAware;
     }
 
     @Override
-    public <T, R> void launch(String jobId, T inputData, Class<R> returnDataType) throws SteveException {
-        if (!loadedJobs) {
-            availableJobs.addAll(getAvailableJobs());
-            loadedJobs = true;
+    public <R> void launch(String jobId, Serializable inputData, Class<R> returnDataType) throws SteveException {
+        Class<?> inputDataType = inputData.getClass();
+        if (!jobAware.jobExists(jobId, inputDataType, returnDataType)){
+            throw new SteveException(String.format("Job not found: %s - %s - %s", jobId, inputDataType.getCanonicalName(), returnDataType.getCanonicalName()));
         }
-        JobSignature jobSignature = new JobSignature(jobId, inputData.getClass(), returnDataType);
-        if (availableJobs.contains(jobSignature)){
-            launchStrategy.launch(
-                    jobSignature,
-                    inputData
-            );
-        }
-        throw new SteveException(String.format("Job not found: %s - %s - %s", jobId, inputData.toString(), returnDataType));
+        JobSignature jobSignature = new JobSignature(jobId, inputDataType, returnDataType);
+        launchStrategy.launch(new JobRun(jobSignature, inputData, Collections.emptyMap())); //TODO: replace with real metadata
     }
 
     @Override
     public void subscribe(Object handler) {
-
+        //TODO: to be implemented!
     }
 }

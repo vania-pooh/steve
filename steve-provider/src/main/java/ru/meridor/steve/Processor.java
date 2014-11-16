@@ -1,5 +1,6 @@
 package ru.meridor.steve;
 
+import java.io.Serializable;
 import java.util.List;
 
 public interface Processor<E> {
@@ -8,6 +9,6 @@ public interface Processor<E> {
 
     List<JobSignature> store(E entity);
 
-    <T, R> Job<T, R> createJob(JobSignature jobSignature) throws Exception;
+    <T extends Serializable, R extends Serializable> Job<T, R> createJob(JobSignature jobSignature) throws Exception;
 
 }

@@ -17,6 +17,8 @@
         <stecker.version>1.0.0-SNAPSHOT</stecker.version>
         <spring.version>4.1.2.RELEASE</spring.version>
         <guice.version>3.0</guice.version>
+        <slf4j.version>1.7.5</slf4j.version>
+        <log4j.version>1.2.17</log4j.version>
     </properties>
 
     <modules>
@@ -27,7 +29,7 @@
         <module>steve-provider</module>
         <module>steve-model</module>
         <module>steve-local</module>
-        <module>steve-local</module>
+        <module>steve-test</module>
     </modules>
 
     <dependencyManagement>
@@ -36,7 +38,7 @@
             <!-- Spring -->
             <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
+                <artifactId>spring-framework-bom</artifactId>
                 <version>${spring.version}</version>
             </dependency>
 
@@ -58,6 +60,39 @@
                 <artifactId>mockito-all</artifactId>
                 <version>1.9.5</version>
                 <scope>test</scope>
+            </dependency>
+
+            <!-- Logging -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>
             </dependency>
 
             <!-- Steve components-->
@@ -86,6 +121,12 @@
                 <artifactId>steve-executor</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>ru.meridor.steve</groupId>
+                <artifactId>steve-test</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+            </dependency>
 
             <!-- Stecker -->
             <dependency>
@@ -102,7 +143,7 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.camel</groupId>
-                <artifactId>camel-guice</artifactId>
+                <artifactId>camel-spring</artifactId>
                 <version>${camel.version}</version>
             </dependency>
             <dependency>
@@ -112,7 +153,7 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.camel</groupId>
-                <artifactId>camel-test</artifactId>
+                <artifactId>camel-test-spring</artifactId>
                 <version>${camel.version}</version>
                 <scope>test</scope>
             </dependency>

@@ -1,9 +1,8 @@
 package ru.meridor.steve.impl;
 
-import ru.meridor.steve.Executor;
-import ru.meridor.steve.Job;
-import ru.meridor.steve.Provider;
-import ru.meridor.steve.SteveException;
+import ru.meridor.steve.*;
+
+import java.io.Serializable;
 
 public class ExecutorImpl implements Executor {
 
@@ -13,11 +12,10 @@ public class ExecutorImpl implements Executor {
         this.jobProvider = jobProvider;
     }
 
-    public Object execute(String jobId, Object data, Class<?> inputDataType, Class<?> returnDataType) throws SteveException {
-        @SuppressWarnings("unchecked")
-        Job<Object, Object> job = (Job<Object, Object>) jobProvider.get(jobId, inputDataType, returnDataType);
+    public Serializable execute(JobRun jobRun) throws SteveException {
+        Job<Serializable, Serializable> job = jobProvider.get(jobRun.getSignature());
         try {
-            return job.execute(data);
+            return job.execute(jobRun.getData());
         } catch (Exception e) {
             throw new SteveException(e);
         }

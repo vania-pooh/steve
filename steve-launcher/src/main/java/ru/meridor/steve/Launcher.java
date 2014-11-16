@@ -1,8 +1,10 @@
 package ru.meridor.steve;
 
+import java.io.Serializable;
+
 public interface Launcher {
 
-    <T, R> void launch(String jobId, T inputData, Class<R> returnDataType) throws SteveException;
+    <R> void launch(String jobId, Serializable inputData, Class<R> returnDataType) throws SteveException;
 
     //TODO: use MBassador for event handling
     void subscribe(Object handler);

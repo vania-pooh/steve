@@ -16,6 +16,10 @@
             <groupId>ru.meridor.steve</groupId>
             <artifactId>steve-framework</artifactId>
         </dependency>
+        <dependency>
+            <groupId>ru.meridor.stecker</groupId>
+            <artifactId>stecker-plugin-loader</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

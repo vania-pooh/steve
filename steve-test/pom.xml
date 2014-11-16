@@ -9,34 +9,32 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>steve-local</artifactId>
+    <artifactId>steve-test</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>ru.meridor.steve</groupId>
-            <artifactId>steve-launcher</artifactId>
+            <artifactId>steve-provider</artifactId>
         </dependency>
         <dependency>
-            <groupId>ru.meridor.steve</groupId>
-            <artifactId>steve-executor</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>ru.meridor.steve</groupId>
-            <artifactId>steve-test</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-core</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-test-spring</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
         </dependency>
     </dependencies>
-
-
 </project>

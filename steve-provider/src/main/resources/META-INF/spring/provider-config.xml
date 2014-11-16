@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="classesProvider" class="ru.meridor.steve.impl.SteckerClassesProvider"/>
+
+    <bean id="provider" class="ru.meridor.steve.impl.ProviderImpl" >
+        <constructor-arg index="0" ref="classesProvider" />
+        <constructor-arg index="1">
+            <array>
+                <bean class="ru.meridor.steve.processor.methods.FunctionMethodProcessor"/>
+                <bean class="ru.meridor.steve.processor.methods.JobMethodProcessor"/>
+                <bean class="ru.meridor.steve.processor.classes.JobClassProcessor"/>
+            </array>
+        </constructor-arg>
+    </bean>
+
+</beans>

@@ -35,6 +35,10 @@
             <artifactId>steve-provider</artifactId>
         </dependency>
         <dependency>
+            <groupId>ru.meridor.steve</groupId>
+            <artifactId>steve-test</artifactId>
+        </dependency>
+        <dependency>
             <groupId>ru.meridor.stecker</groupId>
             <artifactId>stecker-plugin-loader</artifactId>
         </dependency>

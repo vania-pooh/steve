@@ -1,7 +1,11 @@
 package ru.meridor.steve;
 
+import java.io.Serializable;
+
 public interface Provider {
 
-    Job<?, ?> get(String jobId, Class<?> inputDataType, Class<?> returnDataType) throws SteveException;
+    boolean exists(JobSignature jobSignature);
+
+    Job<Serializable, Serializable> get(JobSignature jobSignature) throws SteveException;
 
 }

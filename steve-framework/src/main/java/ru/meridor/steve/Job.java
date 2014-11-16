@@ -1,6 +1,8 @@
 package ru.meridor.steve;
 
-public interface Job<T, R> {
+import java.io.Serializable;
+
+public interface Job<T extends Serializable, R extends Serializable> {
 
     R execute(T data) throws Exception;
 
