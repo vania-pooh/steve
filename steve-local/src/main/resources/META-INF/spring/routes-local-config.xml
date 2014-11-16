@@ -10,11 +10,28 @@
         <constructor-arg ref="provider"/>
     </bean>
 
+    <bean id="eventBusExecutor" class="java.util.concurrent.Executors" factory-method="newFixedThreadPool">
+        <constructor-arg value="10"/> <!-- TODO: make pool size a property -->
+    </bean>
+
+    <bean id="eventBus" class="com.google.common.eventbus.AsyncEventBus">
+        <constructor-arg ref="eventBusExecutor"/>
+    </bean> <!-- TODO: change this to async event bus! -->
+
+    <bean class="ru.meridor.steve.EventBusPostProcessor">
+        <constructor-arg ref="eventBus"/>
+    </bean>
+
     <bean id="launchStrategy" class="ru.meridor.steve.LaunchStrategyFactory" factory-method="createStrategy"/>
+
+    <bean id="resultProcessor" class="ru.meridor.steve.LocalResultProcessor">
+        <constructor-arg ref="eventBus"/>
+    </bean>
 
     <bean class="ru.meridor.steve.impl.LauncherImpl">
         <constructor-arg index="0" ref="launchStrategy"/>
         <constructor-arg index="1" ref="jobAware"/>
+        <constructor-arg index="2" ref="eventBus"/>
     </bean>
 
     <camelContext xmlns="http://camel.apache.org/schema/spring" allowUseOriginalMessage="false" streamCache="true">
@@ -24,7 +41,13 @@
 
         <route>
             <from uri="seda:jobs"/>
-            <to uri="bean:executor"/>
+            <bean ref="executor"/>
+            <to uri="seda:results"/>
+        </route>
+
+        <route>
+            <from uri="seda:results"/>
+            <to uri="bean:resultProcessor"/>
         </route>
 
     </camelContext>

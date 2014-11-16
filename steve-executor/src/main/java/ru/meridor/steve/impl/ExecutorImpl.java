@@ -12,11 +12,13 @@ public class ExecutorImpl implements Executor {
         this.jobProvider = jobProvider;
     }
 
-    public Serializable execute(JobRun jobRun) throws SteveException {
+    public JobResult execute(JobRun jobRun) throws SteveException {
         Job<Serializable, Serializable> job = jobProvider.get(jobRun.getSignature());
         try {
-            return job.execute(jobRun.getData());
+            Serializable result = job.execute(jobRun.getData());
+            return new JobResult(jobRun.getSignature(), result);
         } catch (Exception e) {
+            //TODO: think about exception handling with events!
             throw new SteveException(e);
         }
     }

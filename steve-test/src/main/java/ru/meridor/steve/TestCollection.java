@@ -1,9 +1,7 @@
 package ru.meridor.steve;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import ru.meridor.steve.annotations.JobCollection;
 import ru.meridor.steve.annotations.Job;
+import ru.meridor.steve.annotations.JobCollection;
 
 import java.util.function.Function;
 
