@@ -15,9 +15,4 @@ public @interface Job {
 
     String id() default "";
 
-    /**
-     * Execute job using the schedule automatically
-     * @return
-     */
-    String schedule() default "";
 }

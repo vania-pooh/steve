@@ -16,7 +16,7 @@
 
     <bean id="eventBus" class="com.google.common.eventbus.AsyncEventBus">
         <constructor-arg ref="eventBusExecutor"/>
-    </bean> <!-- TODO: change this to async event bus! -->
+    </bean>
 
     <bean class="ru.meridor.steve.EventBusPostProcessor">
         <constructor-arg ref="eventBus"/>

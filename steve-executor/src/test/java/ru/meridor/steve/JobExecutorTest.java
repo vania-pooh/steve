@@ -49,7 +49,7 @@ public class JobExecutorTest {
         );
         ExecutorImpl jobExecutor = new ExecutorImpl(jobProvider);
 
-        JobRun jobRun = new JobRun(new JobSignature(jobId, String.class, Integer.class), inputValue, Collections.emptyMap());
+        JobRun jobRun = new JobRun(new JobSignature(jobId, String.class, Integer.class), inputValue);
 
         Object outputValue = jobExecutor.execute(jobRun);
         assertThat(outputValue, equalTo(correctOutputValue));

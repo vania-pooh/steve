@@ -26,7 +26,7 @@ public class LauncherImpl implements Launcher {
     public void launch(String jobId, Serializable inputData, Class<?> returnDataType) {
         Class<?> inputDataType = inputData.getClass();
         JobSignature jobSignature = new JobSignature(jobId, inputDataType, returnDataType);
-        JobRun jobRun = new JobRun(jobSignature, inputData, Collections.emptyMap()); //TODO: replace with real metadata
+        JobRun jobRun = new JobRun(jobSignature, inputData);
         try {
             eventBus.post(new JobStartedEvent(jobRun));
             if (!jobAware.jobExists(jobId, inputDataType, returnDataType)){
