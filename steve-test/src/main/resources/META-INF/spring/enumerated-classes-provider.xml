@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="classesProvider" class="ru.meridor.steve.EnumeratedClassesProvider">
+    <bean id="steveClassesProvider" class="ru.meridor.steve.EnumeratedClassesProvider">
         <constructor-arg>
             <array>
                 <value type="java.lang.Class">ru.meridor.steve.TestCollection</value>

@@ -6,48 +6,48 @@
 
     <import resource="provider-config.xml"/>
 
-    <bean id="jobAware" class="ru.meridor.steve.LocalJobAware">
-        <constructor-arg ref="provider"/>
+    <bean id="steveJobAware" class="ru.meridor.steve.LocalJobAware">
+        <constructor-arg ref="steveProvider"/>
     </bean>
 
-    <bean id="eventBusExecutor" class="java.util.concurrent.Executors" factory-method="newFixedThreadPool">
+    <bean id="steveEventBusExecutor" class="java.util.concurrent.Executors" factory-method="newFixedThreadPool">
         <constructor-arg value="10"/> <!-- TODO: make pool size a property -->
     </bean>
 
-    <bean id="eventBus" class="com.google.common.eventbus.AsyncEventBus">
-        <constructor-arg ref="eventBusExecutor"/>
+    <bean id="steveEventBus" class="com.google.common.eventbus.AsyncEventBus">
+        <constructor-arg ref="steveEventBusExecutor"/>
     </bean>
 
     <bean class="ru.meridor.steve.EventBusPostProcessor">
-        <constructor-arg ref="eventBus"/>
+        <constructor-arg ref="steveEventBus"/>
     </bean>
 
-    <bean id="launchStrategy" class="ru.meridor.steve.LaunchStrategyFactory" factory-method="createStrategy"/>
+    <bean id="steveLaunchStrategy" class="ru.meridor.steve.LaunchStrategyFactory" factory-method="createStrategy"/>
 
-    <bean id="resultProcessor" class="ru.meridor.steve.LocalResultProcessor">
-        <constructor-arg ref="eventBus"/>
+    <bean id="steveResultProcessor" class="ru.meridor.steve.LocalResultProcessor">
+        <constructor-arg ref="steveEventBus"/>
     </bean>
 
     <bean class="ru.meridor.steve.impl.LauncherImpl">
-        <constructor-arg index="0" ref="launchStrategy"/>
-        <constructor-arg index="1" ref="jobAware"/>
-        <constructor-arg index="2" ref="eventBus"/>
+        <constructor-arg index="0" ref="steveLaunchStrategy"/>
+        <constructor-arg index="1" ref="steveJobAware"/>
+        <constructor-arg index="2" ref="steveEventBus"/>
     </bean>
 
     <camelContext xmlns="http://camel.apache.org/schema/spring" allowUseOriginalMessage="false" streamCache="true">
-        <proxy id="launchStrategy"
+        <proxy id="steveLaunchStrategy"
                serviceInterface="ru.meridor.steve.LaunchStrategy"
                serviceUrl="seda:jobs"/>
 
         <route>
             <from uri="seda:jobs"/>
-            <bean ref="executor"/>
+            <bean ref="steveExecutor"/>
             <to uri="seda:results"/>
         </route>
 
         <route>
             <from uri="seda:results"/>
-            <to uri="bean:resultProcessor"/>
+            <to uri="bean:steveResultProcessor"/>
         </route>
 
     </camelContext>
