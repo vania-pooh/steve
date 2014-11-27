@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: move this to a separate module
 public class SteckerClassesProvider implements ClassesProvider {
 
     @Override

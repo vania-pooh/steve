@@ -18,7 +18,6 @@ public class ExecutorImpl implements Executor {
             Serializable result = job.execute(jobRun.getData());
             return new JobResult(jobRun.getSignature(), result);
         } catch (Exception e) {
-            //TODO: think about exception handling with events!
             throw new SteveException(e);
         }
     }

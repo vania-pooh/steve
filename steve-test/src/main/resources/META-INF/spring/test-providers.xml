@@ -3,11 +3,19 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="steveClassesProvider" class="ru.meridor.steve.EnumeratedClassesProvider">
+    <bean id="steveClassesProvider" class="ru.meridor.steve.impl.EnumeratedClassesProvider">
         <constructor-arg>
             <array>
                 <value type="java.lang.Class">ru.meridor.steve.TestCollection</value>
                 <value type="java.lang.Class">ru.meridor.steve.TestJobImplementation</value>
+            </array>
+        </constructor-arg>
+    </bean>
+
+    <bean id="steveParameterInstanceProvider" class="ru.meridor.steve.impl.EnumeratedParameterInstanceProvider">
+        <constructor-arg>
+            <array>
+                <bean class="ru.meridor.steve.LengthCalculatorImpl"/>
             </array>
         </constructor-arg>
     </bean>

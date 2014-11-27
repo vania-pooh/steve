@@ -9,6 +9,6 @@ public interface Processor<E> {
 
     List<JobSignature> store(E entity);
 
-    <T extends Serializable, R extends Serializable> Job<T, R> createJob(JobSignature jobSignature) throws Exception;
+    <T extends Serializable, R extends Serializable> Job<T, R> createJob(JobSignature jobSignature, ParameterInstanceProvider parameterInstanceProvider) throws Exception;
 
 }

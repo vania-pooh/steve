@@ -6,6 +6,8 @@
 
     <import resource="provider-config.xml"/>
 
+    <bean id="steveParameterInstanceProvider" class="ru.meridor.steve.ApplicationContextParameterInstanceProvider"/>
+
     <bean id="steveJobAware" class="ru.meridor.steve.LocalJobAware">
         <constructor-arg ref="steveProvider"/>
     </bean>

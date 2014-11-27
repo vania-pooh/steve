@@ -1,4 +1,7 @@
-package ru.meridor.steve;
+package ru.meridor.steve.impl;
+
+import ru.meridor.steve.ClassesProvider;
+import ru.meridor.steve.SteveException;
 
 import java.util.Arrays;
 import java.util.List;

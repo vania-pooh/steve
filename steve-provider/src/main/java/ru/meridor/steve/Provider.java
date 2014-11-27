@@ -2,6 +2,9 @@ package ru.meridor.steve;
 
 import java.io.Serializable;
 
+/**
+ * Returns job instances
+ */
 public interface Provider {
 
     boolean exists(JobSignature jobSignature);

@@ -3,13 +3,14 @@ package ru.meridor.steve;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import ru.meridor.steve.processor.classes.JobClassProcessor;
+import ru.meridor.steve.impl.EnumeratedClassesProvider;
+import ru.meridor.steve.impl.EnumeratedParameterInstanceProvider;
 import ru.meridor.steve.impl.ExecutorImpl;
 import ru.meridor.steve.impl.ProviderImpl;
+import ru.meridor.steve.processor.classes.JobClassProcessor;
 import ru.meridor.steve.processor.methods.FunctionMethodProcessor;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -23,15 +24,17 @@ public class JobExecutorTest {
 
     private final Integer correctOutputValue;
 
-    @Parameterized.Parameters(name = "{0} should return {3} for {2}")
+    @Parameterized.Parameters(name = "{0} should return {2} for {1}")
     public static Iterable<Object[]> getParameters() {
         return Arrays.asList(new Object[][]{
                 {"ru.meridor.steve.TestCollection#testLength", "testString", 10},
                 {"test-length", "42", 2},
                 {"test-collection#testLength", "test", 4},
                 {"test-collection#test-length", "str", 3},
+                {"injected-parameters-test-length", "injected", 8},
                 {"ru.meridor.steve.TestJobImplementation", "testMe", 6},
-                {"test-job-implementation", "test-it", 7}
+                {"test-job-implementation", "test-it", 7},
+                {"injected-parameters-test-job-implementation", "inject-parameter", 16}
         });
     }
 
@@ -42,16 +45,27 @@ public class JobExecutorTest {
     }
 
     @Test
-    public void testEndToEnd() throws SteveException {
+    public void testExecute() throws SteveException {
         ProviderImpl jobProvider = new ProviderImpl(
-                new EnumeratedClassesProvider(TestCollection.class, TestJobImplementation.class),
+                new EnumeratedClassesProvider(
+                        TestCollection.class,
+                        TestJobImplementation.class,
+                        InjectedParametersTestCollection.class,
+                        InjectedParametersTestJobImplementation.class
+                ),
+                new EnumeratedParameterInstanceProvider(
+                        new LengthCalculatorImpl()
+                ),
                 new FunctionMethodProcessor(), new JobClassProcessor()
         );
         ExecutorImpl jobExecutor = new ExecutorImpl(jobProvider);
 
-        JobRun jobRun = new JobRun(new JobSignature(jobId, String.class, Integer.class), inputValue);
+        JobSignature jobSignature = new JobSignature(jobId, String.class, Integer.class);
+        JobRun jobRun = new JobRun(jobSignature, inputValue);
 
-        Object outputValue = jobExecutor.execute(jobRun);
-        assertThat(outputValue, equalTo(correctOutputValue));
+        JobResult actualJobResult = jobExecutor.execute(jobRun);
+        JobResult expectedJobResult = new JobResult(jobSignature, correctOutputValue);
+
+        assertThat(actualJobResult, equalTo(expectedJobResult));
     }
 }

@@ -24,8 +24,11 @@ public class ProviderImpl implements Provider {
 
     private boolean scanned = false;
 
-    public ProviderImpl(ClassesProvider classesProvider, Processor... processors) throws SteveException {
+    private final ParameterInstanceProvider parameterInstanceProvider;
+
+    public ProviderImpl(ClassesProvider classesProvider, ParameterInstanceProvider parameterInstanceProvider, Processor... processors) throws SteveException {
         classesToScan.addAll(classesProvider.provide());
+        this.parameterInstanceProvider = parameterInstanceProvider;
         for (Processor processor : processors) {
             addProcessor(processor);
         }
@@ -108,7 +111,7 @@ public class ProviderImpl implements Provider {
             try {
                 Job job = jobProcessors
                         .get(jobSignature)
-                        .createJob(jobSignature);
+                        .createJob(jobSignature, parameterInstanceProvider);
                 alreadyRequestedJobs.put(jobSignature, job);
                 return job;
             } catch (Exception e) {
