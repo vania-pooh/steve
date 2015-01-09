@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>steve</artifactId>
-        <groupId>ru.meridor.steve</groupId>
+        <groupId>org.meridor.steve</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,15 +13,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>ru.meridor.steve</groupId>
+            <groupId>org.meridor.steve</groupId>
             <artifactId>steve-launcher</artifactId>
         </dependency>
         <dependency>
-            <groupId>ru.meridor.steve</groupId>
+            <groupId>org.meridor.steve</groupId>
             <artifactId>steve-executor</artifactId>
         </dependency>
         <dependency>
-            <groupId>ru.meridor.steve</groupId>
+            <groupId>org.meridor.steve</groupId>
             <artifactId>steve-test</artifactId>
         </dependency>
         <dependency>

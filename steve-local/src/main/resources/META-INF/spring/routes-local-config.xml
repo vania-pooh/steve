@@ -6,31 +6,32 @@
 
     <import resource="provider-config.xml"/>
 
-    <bean id="steveParameterInstanceProvider" class="ru.meridor.steve.ApplicationContextParameterInstanceProvider"/>
+    <bean id="steveParameterInstanceProvider" class="org.meridor.steve.ApplicationContextParameterInstanceProvider"/>
 
-    <bean id="steveJobAware" class="ru.meridor.steve.LocalJobAware">
+    <bean id="steveJobAware" class="org.meridor.steve.LocalJobAware">
         <constructor-arg ref="steveProvider"/>
     </bean>
 
     <bean id="steveEventBusExecutor" class="java.util.concurrent.Executors" factory-method="newFixedThreadPool">
-        <constructor-arg value="10"/> <!-- TODO: make pool size a property -->
+        <constructor-arg value="10"/>
+        <!-- TODO: make pool size a property -->
     </bean>
 
     <bean id="steveEventBus" class="com.google.common.eventbus.AsyncEventBus">
         <constructor-arg ref="steveEventBusExecutor"/>
     </bean>
 
-    <bean class="ru.meridor.steve.EventBusPostProcessor">
+    <bean class="org.meridor.steve.EventBusPostProcessor">
         <constructor-arg ref="steveEventBus"/>
     </bean>
 
-    <bean id="steveLaunchStrategy" class="ru.meridor.steve.LaunchStrategyFactory" factory-method="createStrategy"/>
+    <bean id="steveLaunchStrategy" class="org.meridor.steve.LaunchStrategyFactory" factory-method="createStrategy"/>
 
-    <bean id="steveResultProcessor" class="ru.meridor.steve.LocalResultProcessor">
+    <bean id="steveResultProcessor" class="org.meridor.steve.LocalResultProcessor">
         <constructor-arg ref="steveEventBus"/>
     </bean>
 
-    <bean class="ru.meridor.steve.impl.LauncherImpl">
+    <bean class="org.meridor.steve.impl.LauncherImpl">
         <constructor-arg index="0" ref="steveLaunchStrategy"/>
         <constructor-arg index="1" ref="steveJobAware"/>
         <constructor-arg index="2" ref="steveEventBus"/>
@@ -38,7 +39,7 @@
 
     <camelContext xmlns="http://camel.apache.org/schema/spring" allowUseOriginalMessage="false" streamCache="true">
         <proxy id="steveLaunchStrategy"
-               serviceInterface="ru.meridor.steve.LaunchStrategy"
+               serviceInterface="org.meridor.steve.LaunchStrategy"
                serviceUrl="seda:jobs"/>
 
         <route>

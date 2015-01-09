@@ -5,7 +5,7 @@
 
     <import resource="provider-config.xml"/>
 
-    <bean id="steveExecutor" class="ru.meridor.steve.impl.ExecutorImpl">
+    <bean id="steveExecutor" class="org.meridor.steve.impl.ExecutorImpl">
         <constructor-arg ref="steveProvider"/>
     </bean>
 

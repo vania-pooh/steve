@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>ru.meridor.steve</groupId>
+        <groupId>org.meridor.steve</groupId>
         <artifactId>steve</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
@@ -27,19 +27,19 @@
             <artifactId>mockito-all</artifactId>
         </dependency>
         <dependency>
-            <groupId>ru.meridor.steve</groupId>
+            <groupId>org.meridor.steve</groupId>
             <artifactId>steve-framework</artifactId>
         </dependency>
         <dependency>
-            <groupId>ru.meridor.steve</groupId>
+            <groupId>org.meridor.steve</groupId>
             <artifactId>steve-provider</artifactId>
         </dependency>
         <dependency>
-            <groupId>ru.meridor.steve</groupId>
+            <groupId>org.meridor.steve</groupId>
             <artifactId>steve-test</artifactId>
         </dependency>
         <dependency>
-            <groupId>ru.meridor.stecker</groupId>
+            <groupId>org.meridor.stecker</groupId>
             <artifactId>stecker-plugin-loader</artifactId>
         </dependency>
     </dependencies>

@@ -3,25 +3,25 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="steveClassesProvider" class="ru.meridor.steve.impl.EnumeratedClassesProvider">
+    <bean id="steveClassesProvider" class="org.meridor.steve.impl.EnumeratedClassesProvider">
         <constructor-arg>
             <array/>
         </constructor-arg>
     </bean>
-    <bean id="steveParameterInstanceProvider" class="ru.meridor.steve.impl.EnumeratedParameterInstanceProvider">
+    <bean id="steveParameterInstanceProvider" class="org.meridor.steve.impl.EnumeratedParameterInstanceProvider">
         <constructor-arg>
             <array/>
         </constructor-arg>
     </bean>
 
-    <bean id="steveProvider" class="ru.meridor.steve.impl.ProviderImpl">
-        <constructor-arg index="0" ref="steveClassesProvider" />
+    <bean id="steveProvider" class="org.meridor.steve.impl.ProviderImpl">
+        <constructor-arg index="0" ref="steveClassesProvider"/>
         <constructor-arg index="1" ref="steveParameterInstanceProvider"/>
         <constructor-arg index="2">
             <array>
-                <bean class="ru.meridor.steve.processor.methods.FunctionMethodProcessor"/>
-                <bean class="ru.meridor.steve.processor.methods.JobMethodProcessor"/>
-                <bean class="ru.meridor.steve.processor.classes.JobClassProcessor"/>
+                <bean class="org.meridor.steve.processor.methods.FunctionMethodProcessor"/>
+                <bean class="org.meridor.steve.processor.methods.JobMethodProcessor"/>
+                <bean class="org.meridor.steve.processor.classes.JobClassProcessor"/>
             </array>
         </constructor-arg>
     </bean>

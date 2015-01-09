@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.meridor.steve</groupId>
+    <groupId>org.meridor.steve</groupId>
     <artifactId>steve</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -118,32 +118,32 @@
 
             <!-- Steve components-->
             <dependency>
-                <groupId>ru.meridor.steve</groupId>
+                <groupId>org.meridor.steve</groupId>
                 <artifactId>steve-launcher</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>ru.meridor.steve</groupId>
+                <groupId>org.meridor.steve</groupId>
                 <artifactId>steve-model</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>ru.meridor.steve</groupId>
+                <groupId>org.meridor.steve</groupId>
                 <artifactId>steve-framework</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>ru.meridor.steve</groupId>
+                <groupId>org.meridor.steve</groupId>
                 <artifactId>steve-provider</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>ru.meridor.steve</groupId>
+                <groupId>org.meridor.steve</groupId>
                 <artifactId>steve-executor</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>ru.meridor.steve</groupId>
+                <groupId>org.meridor.steve</groupId>
                 <artifactId>steve-test</artifactId>
                 <version>${project.version}</version>
                 <scope>test</scope>
@@ -151,7 +151,7 @@
 
             <!-- Stecker -->
             <dependency>
-                <groupId>ru.meridor.stecker</groupId>
+                <groupId>org.meridor.stecker</groupId>
                 <artifactId>stecker-plugin-loader</artifactId>
                 <version>${stecker.version}</version>
             </dependency>
@@ -241,7 +241,7 @@
 
     <organization>
         <name>Meridor</name>
-        <url>http://meridor.ru/</url>
+        <url>http://meridor.org/</url>
     </organization>
 
     <licenses>
